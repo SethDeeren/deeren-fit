@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    
+
+    <!-- Flatpicker CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!--JQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <title>Deeren Fit</title>
+
+</head>
+<body>
+
+<div th:replace="components/navbar :: navbar">
+
+</div>
+    
+    <div class="container mt-5">
+        <h3>Add/Edit Sets</h3>
+        <hr>
+        <section>
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="date">Select Date</label>
+                    <input id="date" class="form-control" type="datetime-local" required/>
+                </div>
+                <div class="form-group">
+                    <label for="reps">Reps</label>
+                    <input id="reps" class="form-control" type="number" min="1" required/>
+                </div>
+                <button id="reps-button" type="submit" class="btn btn-dark">Add Set</button>
+                <a th:href="@{/challenges/{id} (id=${challengeId})}" class="ml-4">Back to Dashboard</a>
+            </div>  
+        </section>
+        <div class="table-responsive">
+            <table id="theTable" class="table text-center">
+                <thead>
+
+                <tr>
+                    <td >Set</td><td>Reps</td><td></td>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="record, i : ${stats}">
+                        <td th:text="${i.count}" />
+                        <td th:text="${record.reps}" />
+                        <td>
+                            <form action="#" th:action="@{/my_trackers/{dailyTrackerId} (dailyTrackerId=${record.id})}" method="GET">
+<!--                                <input type="hidden" name="dailyTrackerId" th:value="${record.id}" />-->
+                                <button type="submit" class="btn btn-warning">Edit</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+<!-- flatpickr for the date time picker -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<!-- custom page script -->
+<script type="text/javascript" th:src="@{/js/stat-editor.js}"></script>
+<!-- <script type="text/javascript" src="../static/js/stat-editor.js"></script> -->
+
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script> -->
+
+</body>
+</html>
