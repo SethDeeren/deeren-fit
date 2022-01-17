@@ -1,8 +1,5 @@
 package com.deerenapps.fitchallenge.fitchallenge.controller;
 
-import com.deerenapps.fitchallenge.fitchallenge.entities.Challenge;
-import com.deerenapps.fitchallenge.fitchallenge.entities.User;
-import com.deerenapps.fitchallenge.fitchallenge.entities.UserStats;
 import com.deerenapps.fitchallenge.fitchallenge.model.UserModel;
 import com.deerenapps.fitchallenge.fitchallenge.repos.ChallengeRepository;
 import com.deerenapps.fitchallenge.fitchallenge.repos.UserRepository;

@@ -1,12 +1,12 @@
 package com.deerenapps.fitchallenge.fitchallenge.repos;
 
-import com.deerenapps.fitchallenge.fitchallenge.entities.User;
+import com.deerenapps.fitchallenge.fitchallenge.entities.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UserRepository extends JpaRepository<User,Long> {
-    List<User> findByUsername(String username);
+public interface UserRepository extends JpaRepository<Users,Long> {
+    List<Users> findByUsername(String username);
 
-    User getUserByUsername(String username);
+    Users getUserByUsername(String username);
 }

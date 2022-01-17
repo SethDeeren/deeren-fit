@@ -1,6 +1,6 @@
 package com.deerenapps.fitchallenge.fitchallenge.security;
 
-import com.deerenapps.fitchallenge.fitchallenge.entities.User;
+import com.deerenapps.fitchallenge.fitchallenge.entities.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,13 +10,13 @@ public class MyUserDetails implements UserDetails {
 
     private static final long serialVersionUID = -6690946490872875352L;
 
-    private final User user;
+    private final Users user;
 
-    public MyUserDetails(User user){
+    public MyUserDetails(Users user){
         this.user = user;
     }
 
-    public User getUser(){
+    public Users getUser(){
         return this.user;
     }
 

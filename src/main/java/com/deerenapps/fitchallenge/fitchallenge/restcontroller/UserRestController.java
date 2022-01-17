@@ -1,6 +1,6 @@
 package com.deerenapps.fitchallenge.fitchallenge.restcontroller;
 
-import com.deerenapps.fitchallenge.fitchallenge.entities.User;
+import com.deerenapps.fitchallenge.fitchallenge.entities.Users;
 import com.deerenapps.fitchallenge.fitchallenge.model.UserModel;
 import com.deerenapps.fitchallenge.fitchallenge.repos.UserRepository;
 import com.deerenapps.fitchallenge.fitchallenge.security.MyUserDetailService;
@@ -21,12 +21,12 @@ public class UserRestController {
     MyUserDetailService userService;
 
     @GetMapping("/")
-    public List<User> getUsers(){
+    public List<Users> getUsers(){
         return repo.findAll();
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable long id){
+    public Users getUserById(@PathVariable long id){
         try{
             return repo.getById(id);
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class UserRestController {
     }
 
     @PostMapping("/")
-    public User saveUser(@RequestBody UserModel user){
+    public Users saveUser(@RequestBody UserModel user){
        return userService.save(user);
 
     }

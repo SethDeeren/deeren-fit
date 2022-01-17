@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class DailyTracker {
@@ -27,7 +26,7 @@ public class DailyTracker {
     @ManyToOne
     @JoinColumn(name="user_id")
     @JsonIgnore
-    private User user;
+    private Users user;
 
 
     public DailyTracker(){
@@ -66,11 +65,11 @@ public class DailyTracker {
         this.userStats = userStats;
     }
 
-    public User getUser() {
+    public Users getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Users user) {
         this.user = user;
     }
 

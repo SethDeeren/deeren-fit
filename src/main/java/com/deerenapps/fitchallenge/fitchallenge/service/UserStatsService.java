@@ -1,14 +1,11 @@
 package com.deerenapps.fitchallenge.fitchallenge.service;
 
 import com.deerenapps.fitchallenge.fitchallenge.entities.DailyTracker;
-import com.deerenapps.fitchallenge.fitchallenge.entities.User;
 import com.deerenapps.fitchallenge.fitchallenge.entities.UserStats;
 import com.deerenapps.fitchallenge.fitchallenge.repos.DailyTrackerRepository;
 import com.deerenapps.fitchallenge.fitchallenge.repos.UserRepository;
 import com.deerenapps.fitchallenge.fitchallenge.repos.UserStatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

@@ -1,21 +1,16 @@
 package com.deerenapps.fitchallenge.fitchallenge.controller;
 
 import com.deerenapps.fitchallenge.fitchallenge.entities.DailyTracker;
-import com.deerenapps.fitchallenge.fitchallenge.entities.User;
-import com.deerenapps.fitchallenge.fitchallenge.entities.UserStats;
 import com.deerenapps.fitchallenge.fitchallenge.repos.DailyTrackerRepository;
 import com.deerenapps.fitchallenge.fitchallenge.repos.UserRepository;
 import com.deerenapps.fitchallenge.fitchallenge.service.DailyTrackerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Controller
 public class DailyTrackerController {

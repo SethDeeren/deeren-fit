@@ -41,7 +41,7 @@ public class Challenge {
     }
 
     @Column(name = "start_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd") //'T'HH:mm
     private LocalDate startDate;
 
     public long getId() {

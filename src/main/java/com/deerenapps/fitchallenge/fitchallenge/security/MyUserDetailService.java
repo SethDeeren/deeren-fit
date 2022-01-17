@@ -1,6 +1,6 @@
 package com.deerenapps.fitchallenge.fitchallenge.security;
 
-import com.deerenapps.fitchallenge.fitchallenge.entities.User;
+import com.deerenapps.fitchallenge.fitchallenge.entities.Users;
 import com.deerenapps.fitchallenge.fitchallenge.model.UserModel;
 import com.deerenapps.fitchallenge.fitchallenge.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public MyUserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        List<User> users = userRepository.findByUsername(s);
+        List<Users> users = userRepository.findByUsername(s);
         if(users.size() == 0){
             throw new UsernameNotFoundException("User details not found for : " + s);
         }
@@ -31,15 +31,15 @@ public class MyUserDetailService implements UserDetailsService {
     }
 
     // UserModel will be data from a user creating or updating an account user
-    public User save(UserModel user){
+    public Users save(UserModel user){
 
-        User userEntity;
+        Users userEntity;
 
         // if existing user only updating password else creating new user
         try {
             userEntity = loadUserByUsername(user.getUsername()).getUser();
         } catch (UsernameNotFoundException e){
-            userEntity = new User();
+            userEntity = new Users();
             // get user's requested username
             userEntity.setUsername(user.getUsername());
         }
@@ -52,7 +52,7 @@ public class MyUserDetailService implements UserDetailsService {
     }
 
     public boolean isUsernameUnique(String username) {
-        User userByUsername = userRepository.getUserByUsername(username);
+        Users userByUsername = userRepository.getUserByUsername(username);
         return userByUsername == null;
     }
 

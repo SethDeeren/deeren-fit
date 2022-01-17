@@ -23,7 +23,7 @@ public class UserStats {
     private Challenge challenge;
 
     @ManyToOne
-    private User user;
+    private Users user;
 
     @OneToMany(mappedBy="userStats", cascade = CascadeType.ALL)
     private List<DailyTracker> dailyTrackers;
@@ -32,7 +32,7 @@ public class UserStats {
 
     }
 
-    public UserStats(Challenge challenge, User user) {
+    public UserStats(Challenge challenge, Users user) {
         this.challenge = challenge;
         this.user = user;
     }
@@ -93,11 +93,11 @@ public class UserStats {
         this.challenge = challenge;
     }
 
-    public User getUser() {
+    public Users getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Users user) {
         this.user = user;
     }
 

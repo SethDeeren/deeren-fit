@@ -3,7 +3,7 @@ package com.deerenapps.fitchallenge.fitchallenge.service;
 import com.deerenapps.fitchallenge.fitchallenge.dto.DailyTrackerRequest;
 import com.deerenapps.fitchallenge.fitchallenge.entities.Challenge;
 import com.deerenapps.fitchallenge.fitchallenge.entities.DailyTracker;
-import com.deerenapps.fitchallenge.fitchallenge.entities.User;
+import com.deerenapps.fitchallenge.fitchallenge.entities.Users;
 import com.deerenapps.fitchallenge.fitchallenge.entities.UserStats;
 import com.deerenapps.fitchallenge.fitchallenge.repos.ChallengeRepository;
 import com.deerenapps.fitchallenge.fitchallenge.repos.DailyTrackerRepository;
@@ -44,7 +44,7 @@ public class DailyTrackerService {
         // get authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        User user = userRepository.findByUsername(username).get(0);
+        Users user = userRepository.findByUsername(username).get(0);
 
         // find or create user to challenge association
         if(userStatsRepository.findByUserIdAndChallengeId(user.getId(), challengeId) == null){
@@ -85,7 +85,7 @@ public class DailyTrackerService {
         // Get the user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        User user = userRepository.findByUsername(username).get(0);
+        Users user = userRepository.findByUsername(username).get(0);
         // Create the Daily tracker
         DailyTracker dailyTracker = new DailyTracker();
         dailyTracker.setReps(dailyTrackerRequest.getReps());
