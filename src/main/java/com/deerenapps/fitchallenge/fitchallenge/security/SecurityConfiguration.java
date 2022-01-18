@@ -18,6 +18,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/challenges").permitAll()
                 .antMatchers("/challenges/*").permitAll()
+                .antMatchers("/api/users/check_username").permitAll()
                 .antMatchers("/users").permitAll()
                 .antMatchers("/users/*").permitAll()
                 .antMatchers("/my_stats").authenticated()

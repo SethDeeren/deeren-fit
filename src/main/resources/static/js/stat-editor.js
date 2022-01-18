@@ -89,9 +89,10 @@ function setDate(){
 
     if(window.location.pathname.substr(26) != ''){
         theReturnDate = new Date(window.location.pathname.substr(26));
-        theReturnDate.setUTCDate(theReturnDate.getUTCDate() + 1);
+        //theReturnDate.setDate(theReturnDate.getDate() + 1);
     } else {
         theReturnDate = new Date();
+        //theReturnDate.setDate(theReturnDate.getDate() - 1);
     }
 
     return theReturnDate;
