@@ -55,10 +55,9 @@
                         <td th:text="${i.count}" />
                         <td th:text="${record.reps}" />
                         <td>
-                            <form action="#" th:action="@{/my_trackers/{dailyTrackerId} (dailyTrackerId=${record.id})}" method="GET">
-<!--                                <input type="hidden" name="dailyTrackerId" th:value="${record.id}" />-->
-                                <button type="submit" class="btn btn-warning">Edit</button>
-                            </form>
+                            <section action="#" th:action="@{/api/my_stats/{dailyTrackerId} (dailyTrackerId=${record.id})}" method="GET">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </section>
                         </td>
 
                     </tr>
