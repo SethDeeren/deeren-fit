@@ -75,8 +75,10 @@ public class DailyTrackerRestController {
     public DailyTracker deleteMyStatsAPI(@PathVariable int id){
         // find daily tracker by id
         DailyTracker dt = dailyTrackerRepository.findById(id).get();
+
+        dailyTrackerService.deleteDailyTracker(dt);
         // delete the daily tracker
-        dailyTrackerRepository.deleteById(id);
+        //dailyTrackerRepository.deleteById(id);
         return dt;
     }
 }
