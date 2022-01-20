@@ -55,9 +55,12 @@
                         <td th:text="${i.count}" />
                         <td th:text="${record.reps}" />
                         <td>
-                            <section action="#" th:action="@{/api/my_stats/{dailyTrackerId} (dailyTrackerId=${record.id})}" method="GET">
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </section>
+                            <div>
+                                <button th:attr="data-tracker_id=${record.id}"
+                                        id="delete-button" class="btn btn-danger"
+                                        onclick="deleteTracker(this);"
+                                >Delete</button>
+                            </div>
                         </td>
 
                     </tr>

@@ -31,6 +31,10 @@ $(document).ready(function(){
             
         }    
     });
+
+    $('#delete-button').click(function(){
+        alert()
+    })
 });
 
 
@@ -39,7 +43,7 @@ function postSet(reps) {
 
     // send post request
     var stringDate = theDate; 
-    stringDate = stringDate.toISOString().split('T')[0];//----------------------------------------------will somtimes be date and somtimes string
+    stringDate = stringDate.toISOString().split('T')[0];
     
     console.log("The of the date is " + typeof(theDate));
     console.log(theDate);
@@ -56,6 +60,24 @@ function postSet(reps) {
         }
     });       
 };
+
+function deleteTracker(identifier){
+    let id = $(identifier).data('tracker_id');
+
+    var stringDate = theDate; 
+    stringDate = stringDate.toISOString().split('T')[0];
+
+    $.ajax({
+        type: "DELETE",
+        url: `/api/my_stats/${id}`,
+        //contentType: "application/json; charset=utf-8",
+        //data: `{"day": "${stringDate}", "reps": ${reps}, "challengeId": ${challengeId}}`,
+        success: function(data){
+            console.log(data);
+            loadTrackers(stringDate);
+        }
+    });
+}
 
 
 async function loadTrackers(date){
@@ -75,9 +97,12 @@ async function loadTrackers(date){
                 <td>${i + 1}</td>
                 <td>${response[i].reps}</td>
                 <td>
-                <form action="/my_trackers/${response[i].id}" method="GET">
-                    <button type="submit" class="btn btn-warning">Edit</button>
-                </form>
+                <div>
+                    <button data-tracker_id="${record.id}"
+                            id="delete-button" class="btn btn-danger"
+                            onclick="deleteTracker(this);"
+                    >Delete</button>
+                </div>
                 </td>
             </tr>`)
     }    
