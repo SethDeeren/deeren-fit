@@ -15,6 +15,9 @@ $(document).ready(function(){
        var reps = parseInt($('#reps').val());
             if(isNaN(reps)){
                 alert("Must enter a number for reps")
+            }
+            else if(reps <= 0){
+                alert("Reps must be greater then 0")
             } else {
                 postSet(reps);
             }
@@ -25,6 +28,9 @@ $(document).ready(function(){
             var reps = parseInt($('#reps').val());
             if(isNaN(reps)){
                 alert("Must enter a number for reps")
+            }
+            else if(reps <= 0){
+                alert("Reps must be greater then 0")
             } else {
                 postSet(reps);
             }
@@ -57,6 +63,24 @@ function postSet(reps) {
     });       
 };
 
+function deleteTracker(identifier){
+    let id = $(identifier).data('tracker_id');
+
+    var stringDate = theDate; 
+    stringDate = stringDate.toISOString().split('T')[0];
+
+    $.ajax({
+        type: "DELETE",
+        url: `/api/my_stats/${id}`,
+        //contentType: "application/json; charset=utf-8",
+        //data: `{"day": "${stringDate}", "reps": ${reps}, "challengeId": ${challengeId}}`,
+        success: function(data){
+            console.log(data);
+            loadTrackers(stringDate);
+        }
+    });
+}
+
 
 async function loadTrackers(date){
     console.log("type of the date being passed to load trackers is " + typeof(date));
@@ -75,9 +99,12 @@ async function loadTrackers(date){
                 <td>${i + 1}</td>
                 <td>${response[i].reps}</td>
                 <td>
-                <form action="/my_trackers/${response[i].id}" method="GET">
-                    <button type="submit" class="btn btn-warning">Edit</button>
-                </form>
+                <div>
+                    <button data-tracker_id="${response[i].id}"
+                            id="delete-button" class="btn btn-outline-danger"
+                            onclick="deleteTracker(this);"
+                    >Delete</button>
+                </div>
                 </td>
             </tr>`)
     }    
