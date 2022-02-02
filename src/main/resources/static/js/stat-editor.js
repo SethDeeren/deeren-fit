@@ -44,9 +44,11 @@ function postSet(reps) {
 
 
     // send post request
-    var stringDate = theDate; 
-    stringDate = stringDate.toISOString().split('T')[0];//----------------------------------------------will somtimes be date and somtimes string
-    
+//    var stringDate = theDate;
+//    stringDate = stringDate.toISOString().split('T')[0];//----------------------------------------------will somtimes be date and somtimes string
+
+    var stringDate = $('#date').val();
+
     console.log("The of the date is " + typeof(theDate));
     console.log(theDate);
    
@@ -88,7 +90,7 @@ async function loadTrackers(date){
     console.log("type of the date being pulled from the dom " + typeof(domDate));
     console.log(domDate);
     // flat pickr changes date to string this changes it back to date object
-    theDate = domDate;
+   // theDate = domDate;
     $('#theTable').find('tbody').detach();
     $('#theTable').append($('<tbody>'));
     console.log("the date is " + theDate);
