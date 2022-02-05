@@ -12,6 +12,7 @@
                 <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges'}" th:href="@{/challenges/create-form}">Create Challenge</a>
             </div>
             <div  sec:authorize="isAuthenticated()" class="navbar-nav">
+                <a class="nav-link" th:href="@{/users/edit-form}">Edit Profile</a>
                 <a class="nav-link" th:href="@{/logout}">Logout</a>
             </div>
             <div  sec:authorize="isAnonymous()" class="navbar-nav">
