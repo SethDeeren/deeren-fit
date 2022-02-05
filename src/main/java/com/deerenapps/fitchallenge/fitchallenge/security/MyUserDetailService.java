@@ -44,6 +44,8 @@ public class MyUserDetailService implements UserDetailsService {
             userEntity.setUsername(user.getUsername());
         }
 
+        userEntity.setName(user.getName());
+
         // get user's requested password and hash it before saving
         userEntity.setPassword(bcryptEncoder.encode(user.getPassword()));
 

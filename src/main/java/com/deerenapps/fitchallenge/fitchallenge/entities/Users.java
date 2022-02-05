@@ -13,6 +13,8 @@ public class Users {
     @Column
     private String username;
     @Column
+    private String name;
+    @Column
     private String password;
 
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
@@ -27,6 +29,14 @@ public class Users {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
