@@ -43,6 +43,7 @@
     <div class="text-center">
         <b>Crew Total: </b><span th:text="${challenge.crewTotal}"></span>
     </div>
+    <a class="mt-10" th:href="@{/challenges/{id}/charts (id=${challenge.id})}">charts</a>
 
 </div>
 

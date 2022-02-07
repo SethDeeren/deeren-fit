@@ -2,6 +2,7 @@ package com.deerenapps.fitchallenge.fitchallenge.controller;
 
 import com.deerenapps.fitchallenge.fitchallenge.entities.Challenge;
 import com.deerenapps.fitchallenge.fitchallenge.entities.DailyTracker;
+import com.deerenapps.fitchallenge.fitchallenge.entities.UserStats;
 import com.deerenapps.fitchallenge.fitchallenge.repos.DailyTrackerRepository;
 import com.deerenapps.fitchallenge.fitchallenge.repos.UserRepository;
 import com.deerenapps.fitchallenge.fitchallenge.service.ChallengeService;
@@ -22,7 +23,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ChallengeController {
@@ -58,6 +61,24 @@ public class ChallengeController {
         model.addAttribute("stats", userStatsService.findUserStats(challengeId));
         model.addAttribute("challenge", challengeService.getChallengeById(challengeId));
         return "challenge-dashboard";
+    }
+
+    @GetMapping("/challenges/{challengeId}/charts")
+    public String getChallengeCharts(Model model, @PathVariable long challengeId){
+        Map<String, Integer> userCumulatives = new LinkedHashMap<String, Integer>();
+        int maxUserCumulativeValue = 0;
+        for(UserStats userStats : userStatsService.findUserStats(challengeId)){
+            int userCumulative = userStats.getCumalitive();
+            maxUserCumulativeValue = userCumulative > maxUserCumulativeValue ? userCumulative : maxUserCumulativeValue;
+            userCumulatives.put(userStats.getUser().getName(), userCumulative);
+        }
+        model.addAttribute("challengeId", challengeId);
+
+        model.addAttribute("maxUserCumulativeValue", maxUserCumulativeValue + (maxUserCumulativeValue/4));
+        model.addAttribute("userCumulativesKeySet", userCumulatives.keySet());
+        model.addAttribute("userCumulativeValues", userCumulatives.values());
+
+        return "challengeCharts";
     }
 
     @GetMapping("/challenges/create-form")
