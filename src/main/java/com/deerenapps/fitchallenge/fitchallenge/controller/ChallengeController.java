@@ -66,17 +66,31 @@ public class ChallengeController {
     @GetMapping("/challenges/{challengeId}/charts")
     public String getChallengeCharts(Model model, @PathVariable long challengeId){
         Map<String, Integer> userCumulatives = new LinkedHashMap<String, Integer>();
-        int maxUserCumulativeValue = 0;
+        Map<String, Integer> userPrs = new LinkedHashMap<String, Integer>();
+
+       // int maxUserCumulativeValue = 0;
+       // int maxUserPr = 0;
+
         for(UserStats userStats : userStatsService.findUserStats(challengeId)){
             int userCumulative = userStats.getCumalitive();
-            maxUserCumulativeValue = userCumulative > maxUserCumulativeValue ? userCumulative : maxUserCumulativeValue;
+            int userSetPR = userStats.getSet_pr();
+
+            //maxUserCumulativeValue = userCumulative > maxUserCumulativeValue ? userCumulative : maxUserCumulativeValue;
+            //maxUserCumulativeValue = userSetPR > maxUserPr ? userSetPR : maxUserPr;
+
             userCumulatives.put(userStats.getUser().getName(), userCumulative);
+            userPrs.put(userStats.getUser().getName(), userSetPR);
         }
+
         model.addAttribute("challengeId", challengeId);
 
-        model.addAttribute("maxUserCumulativeValue", maxUserCumulativeValue + (maxUserCumulativeValue/4));
+        //model.addAttribute("maxUserCumulativeValue", maxUserCumulativeValue + (maxUserCumulativeValue/4));
         model.addAttribute("userCumulativesKeySet", userCumulatives.keySet());
         model.addAttribute("userCumulativeValues", userCumulatives.values());
+
+        //model.addAttribute("maxUserPR", maxUserPr + (maxUserPr/4));
+        model.addAttribute("userPRKeySet",userPrs.keySet());
+        model.addAttribute("userPRValues", userPrs.values());
 
         return "challengeCharts";
     }
