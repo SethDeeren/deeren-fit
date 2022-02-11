@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -26,6 +27,8 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 @Controller
 public class ChallengeController {
@@ -65,32 +68,38 @@ public class ChallengeController {
 
     @GetMapping("/challenges/{challengeId}/charts")
     public String getChallengeCharts(Model model, @PathVariable long challengeId){
-        Map<String, Integer> userCumulatives = new LinkedHashMap<String, Integer>();
-        Map<String, Integer> userPrs = new LinkedHashMap<String, Integer>();
 
-       // int maxUserCumulativeValue = 0;
-       // int maxUserPr = 0;
+        // Getting Maps should be in ChallengeService class
 
-        for(UserStats userStats : userStatsService.findUserStats(challengeId)){
-            int userCumulative = userStats.getCumalitive();
-            int userSetPR = userStats.getSet_pr();
+        //Map<String, Integer> localDateIntegerMap = challengeService.getGroupAccumulationOverTime(challengeId);
 
-            //maxUserCumulativeValue = userCumulative > maxUserCumulativeValue ? userCumulative : maxUserCumulativeValue;
-            //maxUserCumulativeValue = userSetPR > maxUserPr ? userSetPR : maxUserPr;
+        Map<String, Integer> userCumulatives = challengeService.getChallengeChartMap(challengeId, UserStats::getCumalitive);
+        Map<String, Integer> userSetPrs = challengeService.getChallengeChartMap(challengeId, UserStats::getSet_pr);
+        Map<String, Integer> userDailyPRs = challengeService.getChallengeChartMap(challengeId, UserStats::getDaily_pr);
+        Map<String, Integer> userWeeklyPRs = challengeService.getChallengeChartMap(challengeId, UserStats::getWeekly_pr);
 
-            userCumulatives.put(userStats.getUser().getName(), userCumulative);
-            userPrs.put(userStats.getUser().getName(), userSetPR);
-        }
 
+
+        // dashboard link
         model.addAttribute("challengeId", challengeId);
 
-        //model.addAttribute("maxUserCumulativeValue", maxUserCumulativeValue + (maxUserCumulativeValue/4));
+        // for cumulative chart
         model.addAttribute("userCumulativesKeySet", userCumulatives.keySet());
         model.addAttribute("userCumulativeValues", userCumulatives.values());
 
-        //model.addAttribute("maxUserPR", maxUserPr + (maxUserPr/4));
-        model.addAttribute("userPRKeySet",userPrs.keySet());
-        model.addAttribute("userPRValues", userPrs.values());
+        // for set PR chart
+        model.addAttribute("userSetPRKeySet",userSetPrs.keySet());
+        model.addAttribute("userSetPRValues", userSetPrs.values());
+
+        // for daily PR chart
+        model.addAttribute("userDailyPRKeySet",userDailyPRs.keySet());
+        model.addAttribute("userDailyPRValues", userDailyPRs.values());
+
+        // for weekly PR chart
+        model.addAttribute("userWeeklyPRKeySet",userWeeklyPRs.keySet());
+        model.addAttribute("userWeeklyPRValues", userWeeklyPRs.values());
+
+
 
         return "challengeCharts";
     }
