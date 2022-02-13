@@ -71,7 +71,8 @@ public class ChallengeController {
 
         // Getting Maps should be in ChallengeService class
 
-        //Map<String, Integer> localDateIntegerMap = challengeService.getGroupAccumulationOverTime(challengeId);
+        // more complex query needed special method possibly change ddl in future
+        Map<String, Integer> teamAccumulationOverTimeMap = challengeService.getGroupAccumulationOverTime(challengeId);
 
         Map<String, Integer> userCumulatives = challengeService.getChallengeChartMap(challengeId, UserStats::getCumalitive);
         Map<String, Integer> userSetPrs = challengeService.getChallengeChartMap(challengeId, UserStats::getSet_pr);
@@ -83,7 +84,11 @@ public class ChallengeController {
         // dashboard link
         model.addAttribute("challengeId", challengeId);
 
-        // for cumulative chart
+        // for group accumulation over time chart
+        model.addAttribute("groupAccumulationOverTimeKeySet", teamAccumulationOverTimeMap.keySet());
+        model.addAttribute("groupAccumulationOverTimeValues", teamAccumulationOverTimeMap.values());
+
+        // for cumulative by user chart
         model.addAttribute("userCumulativesKeySet", userCumulatives.keySet());
         model.addAttribute("userCumulativeValues", userCumulatives.values());
 

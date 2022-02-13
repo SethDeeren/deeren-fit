@@ -18,5 +18,5 @@ public interface ChallengeRepository extends JpaRepository<Challenge, Long> {
             "where challenge.id = :challengeId " +
             "Group By day " +
             "order by day;", nativeQuery = true)
-    HashMap<String, Integer> findAllByUserStatsIdAndSortByDayAsc(long challengeId);
+    List<Object[]> findAccumulationByDay(long challengeId);
 }

@@ -68,8 +68,7 @@ function postSet(reps) {
 function deleteTracker(identifier){
     let id = $(identifier).data('tracker_id');
 
-    var stringDate = theDate; 
-    stringDate = stringDate.toISOString().split('T')[0];
+    var stringDate = $('#date').val();
 
     $.ajax({
         type: "DELETE",
