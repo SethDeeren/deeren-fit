@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -128,7 +129,8 @@ public class UserStatsService {
 
     public boolean isTrackerCurrentWeek(DailyTracker dailyTracker, int startDay){
         // integer divide by seven will give us the week number the tracker falls under
-        System.out.println("local date is ==============================>>>>>>>>>>>>>>" + LocalDate.now());
+        System.out.println("local date is ==============================>>>>>>>>>>>>>>" + new Date());
+        System.out.println();
         int currentWeek = (LocalDate.now().getDayOfYear() - startDay) / 7;
         int trackerWeek = (dailyTracker.getDay().getDayOfYear() - startDay) / 7;
         return currentWeek == trackerWeek;
