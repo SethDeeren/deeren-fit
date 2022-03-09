@@ -19,4 +19,6 @@ public interface ChallengeRepository extends JpaRepository<Challenge, Long> {
             "Group By day " +
             "order by day;", nativeQuery = true)
     List<Object[]> findAccumulationByDay(long challengeId);
+
+    List<Challenge> findByActiveTrue();
 }

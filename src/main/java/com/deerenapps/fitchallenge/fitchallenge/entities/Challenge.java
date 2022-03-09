@@ -24,11 +24,14 @@ public class Challenge {
     @Column(name = "crew_total")
     private int crewTotal;
 
+    @Column(name="active")
+    private boolean active;
+
     // A Tracker does not make sense without a challenge it belongs to
     // Therefore this is a uni-directional relationship when we delete a challenge delete all trackers
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="challenge_id") // refers to challenge_id in the tracker table
-    private List<UserStats> trackers;
+    private List<UserStats> userStats;
 
     public Challenge(){
 
@@ -86,6 +89,30 @@ public class Challenge {
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public List<UserStats> getUserStats() {
+        return userStats;
+    }
+
+    public void setUserStats(List<UserStats> trackers) {
+        this.userStats = trackers;
     }
 
     @Override

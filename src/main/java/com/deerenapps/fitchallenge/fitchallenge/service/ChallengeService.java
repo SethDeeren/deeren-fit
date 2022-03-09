@@ -5,6 +5,7 @@ import com.deerenapps.fitchallenge.fitchallenge.entities.UserStats;
 import com.deerenapps.fitchallenge.fitchallenge.repos.ChallengeRepository;
 import com.deerenapps.fitchallenge.fitchallenge.repos.UserStatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -121,4 +122,36 @@ public class ChallengeService {
     public Challenge createChallenge(Challenge challenge) {
         return challengeRepository.save(challenge);
     }
+
+    /*
+     * Run this method everyday at 1 am
+     * calculate only for active challenges hitting a week mark
+     *
+     * This is an O(n^2) method. But it is running at 1 am when users aren't active
+     *
+     * cron = second, minute, hour, day of month, month, day(s) of week
+     * */
+    @Scheduled(cron = "0 0 1 * * *")
+    public void calculateAllUserStatsForEachChallenge(){
+
+        System.out.println("calculateAllUserStatsForEachChallenge: ran on " + LocalDate.now());
+
+        // find all active challenges
+        List<Challenge> activeChallenges = challengeRepository.findByActiveTrue();
+        System.out.println("calculateAllUserStatsForEachChallenge: number of active challenges " + activeChallenges.size());
+        // loop
+        for (Challenge challenge : activeChallenges){
+            // check if new week, if yes calculate all stats
+            if((challenge.getStartDate().getDayOfYear() - LocalDate.now().getDayOfYear()) % 7 == 0){
+                for(UserStats userStats : challenge.getUserStats()){
+                    userStatsService.calculateStats(userStats);
+                    System.out.println("Calculate userStats.id " + userStats.getId());
+                }
+            }
+        }
+
+    }
+
+    // another method possibly to set an indicator of a challenge ended
 }
+
