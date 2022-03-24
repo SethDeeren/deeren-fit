@@ -23,12 +23,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Controller
 public class ChallengeController {
@@ -64,6 +62,16 @@ public class ChallengeController {
         model.addAttribute("stats", userStatsService.findUserStats(challengeId));
         model.addAttribute("challenge", challengeService.getChallengeById(challengeId));
         return "challenge-dashboard";
+    }
+
+    @GetMapping("/challenges/{challengeId}/leader-board")
+    public String getLeaderBoard(Model model, @PathVariable long challengeId){
+
+        model.addAttribute("stats", userStatsService.findUserStats(challengeId)
+                .stream().sorted(Comparator.comparingInt(UserStats::getRank)).collect(Collectors.toList())
+        );
+        model.addAttribute("challenge", challengeService.getChallengeById(challengeId));
+        return "challenge-leader-board";
     }
 
     @GetMapping("/challenges/{challengeId}/charts")

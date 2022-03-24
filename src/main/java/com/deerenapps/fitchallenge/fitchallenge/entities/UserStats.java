@@ -17,6 +17,8 @@ public class UserStats {
     private int weekly_pr;
     private int set_pr;
     private String status;
+    private int points;
+    private int rank;
 
     @ManyToOne
     //@JoinColumn(name="challenge_id")
@@ -107,6 +109,22 @@ public class UserStats {
 
     public void setSet_pr(int set_pr) {
         this.set_pr = set_pr;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     public List<DailyTracker> getDailyTrackers() {

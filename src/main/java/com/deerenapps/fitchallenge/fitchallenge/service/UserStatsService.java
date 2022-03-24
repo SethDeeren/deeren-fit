@@ -1,5 +1,6 @@
 package com.deerenapps.fitchallenge.fitchallenge.service;
 
+import com.deerenapps.fitchallenge.fitchallenge.entities.Challenge;
 import com.deerenapps.fitchallenge.fitchallenge.entities.DailyTracker;
 import com.deerenapps.fitchallenge.fitchallenge.entities.UserStats;
 import com.deerenapps.fitchallenge.fitchallenge.repos.DailyTrackerRepository;
@@ -10,8 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Service
 public class UserStatsService {
@@ -124,6 +128,7 @@ public class UserStatsService {
         userStats.setWeekly_pr(weeklyPR);
         userStats.setSet_pr(setPR);
         userStatsRepository.save(userStats);
+        calculateLeaderBoard(userStats.getChallenge());
         challengeService.calculateCrewTotal(userStats.getChallenge());
     }
 
@@ -136,5 +141,85 @@ public class UserStatsService {
 
     public int getCurrentTrackerWeek(DailyTracker dailyTracker, int startDay){
         return (dailyTracker.getDay().getDayOfYear() - startDay) / 7;
+    }
+
+    /*
+     * Get users with highest reps from multiple categories
+     * assigning rank and points for those with highest reps
+     */
+    public void calculateLeaderBoard(Challenge challenge){
+
+        int highestSetPR = 0;
+        int highestDailyPR = 0;
+        int highestWeeklyPR = 0;
+        int highestCumulative = 0;
+
+        //AtomicInteger statRank = new AtomicInteger(1);
+        int statRank;
+        UserStats userStatsWinner;
+
+        // Start with a clear board erase everyone's status for a given challenge
+        List<UserStats> userStatsList = challenge.getUserStats();
+        userStatsList.stream().forEach(userStats -> {
+            userStats.setStatus("");
+            userStats.setPoints(0);
+        });
+
+        // start with a series of sorting for each status number to find highest in each category
+
+        // Current Highest set PR
+        userStatsList = userStatsList.stream().sorted(Comparator.comparingInt(UserStats::getSet_pr).reversed()).collect(Collectors.toList());
+        highestSetPR = userStatsList.get(0).getSet_pr();
+
+        // Current Highest Daily PR
+        userStatsList = userStatsList.stream().sorted(Comparator.comparingInt(UserStats::getDaily_pr).reversed()).collect(Collectors.toList());
+        highestDailyPR = userStatsList.get(0).getDaily_pr();
+
+        // Current Highest Weekly PR
+        userStatsList = userStatsList.stream().sorted(Comparator.comparingInt(UserStats::getWeekly_pr).reversed()).collect(Collectors.toList());
+        highestWeeklyPR = userStatsList.get(0).getWeekly_pr();
+
+        // Current Highest Cumalitive
+        userStatsList = userStatsList.stream().sorted(Comparator.comparingInt(UserStats::getCumalitive).reversed()).collect(Collectors.toList());
+        highestCumulative = userStatsList.get(0).getCumalitive();
+
+        // for each user stats check if they have the highest status and if so assign status and points
+        // this will also ensure if more then one winner all will get points
+
+        for (UserStats userStats : userStatsList) {
+            String status = userStats.getStatus();
+            if (userStats.getCumalitive() >= highestCumulative) {
+                status = status.equals("") ? "Highest Cumulative" : status + ", Highest Cumulative";
+                userStats.setPoints(userStats.getPoints() + 5);
+            }
+            if (userStats.getSet_pr() >= highestSetPR) {
+                status = status.equals("") ? "Highest Set PR" : status + ", Highest Set PR";
+                userStats.setPoints(userStats.getPoints() + 2);
+            }
+            if (userStats.getDaily_pr() >= highestDailyPR) {
+                status = status.equals("") ? "Highest Daily PR" : status + ", Highest Daily PR";
+                userStats.setPoints(userStats.getPoints() + 2);
+            }
+            if(userStats.getWeekly_pr() >= highestWeeklyPR) {
+                status = status.equals("") ? "Highest Weekly PR" : status + ", Highest Weekly PR";
+                userStats.setPoints(userStats.getPoints() + 2);
+            }
+            userStats.setStatus(status);
+
+        }
+
+        calculateRank(userStatsList);
+
+    }
+
+    private void calculateRank(List<UserStats> userStatsList){
+        AtomicInteger rank = new AtomicInteger(1);
+        userStatsList.stream()
+                .sorted(Comparator.comparingInt(UserStats::getPoints).reversed())
+                .map(userStats -> {
+                    userStats.setRank(rank.getAndIncrement());
+                    return userStatsRepository.save(userStats);
+                })
+                .collect(Collectors.toList());
     }
 }
