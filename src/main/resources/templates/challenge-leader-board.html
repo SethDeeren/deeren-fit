@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <title>Deeren Fit</title>
+</head>
+<body>
+<div th:replace="components/navbar :: navbar">
+
+</div>
+
+<div class="container mt-5">
+
+    <h3 th:text="${challenge.title}"></h3>
+    <p th:text="${challenge.motto}"></p>
+    <a th:href="@{/challenges/{id}/my_trackers (id=${challenge.id})}">Add your daily trackers</a>
+
+    <hr>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+
+            <tr>
+                <td>Rank</td> <td>Challenger</td> <td>Points</td><td>Status</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="stat : ${stats}">
+                <td th:text="${stat.rank}" /> <td th:text="${stat.user.name}" />
+                <td th:text="${stat.points}" /> <td th:text="${stat.status}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <b>Crew Total: </b><span th:text="${challenge.crewTotal}"></span>
+    </div>
+    <a class="mt-10" th:href="@{/challenges/{id}/charts (id=${challenge.id})}">charts</a>
+    <a class="mt-10" th:href="@{/challenges/{id} (id=${challenge.id})}">Dash Board</a>
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
