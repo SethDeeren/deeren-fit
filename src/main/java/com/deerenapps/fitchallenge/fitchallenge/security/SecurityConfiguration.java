@@ -20,6 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/challenges").permitAll()
                 .antMatchers("/challenges/*").permitAll()
                 .antMatchers("/challenges/*/charts").permitAll()
+                .antMatchers("/challenges/*/leader-board").permitAll()
                 .antMatchers("/users").permitAll()
                 .antMatchers("/users/*").permitAll()
                 .antMatchers("/my_stats").authenticated()

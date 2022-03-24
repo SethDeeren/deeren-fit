@@ -21,6 +21,7 @@
                 <a class="nav-link" th:href="@{/login}">Login</a>
             </div>
             <div class="navbar-nav">
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/1'}" th:href="@{/challenges/1/leader-board}">Leader Board</a>
                 <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/1'}" th:href="@{/challenges/1/charts}">Charts</a>
 
                 <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/1/leader-board'}" th:href="@{/challenges/1}">Dash Board</a>
@@ -29,23 +30,23 @@
                 <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/1/charts'}" th:href="@{/challenges/1}">Dash Board</a>
                 <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/1/charts'}" th:href="@{/challenges/1/leader-board}">Leader Board</a>
 
-                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/2/charts (id=${challenge.id})'}" th:href="@{/challenges/1/leader-board}">Leader Board</a>
-                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/2'}" th:href="@{/challenges/1/charts}">Charts</a>
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/2'}" th:href="@{/challenges/2/leader-board}">Leader Board</a>
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/2'}" th:href="@{/challenges/2/charts}">Charts</a>
 
-                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/2/leader-board'}" th:href="@{/challenges/1}">Dash Board</a>
-                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/2/leader-board'}" th:href="@{/challenges/1/charts}">Charts</a>
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/2/leader-board'}" th:href="@{/challenges/2}">Dash Board</a>
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/2/leader-board'}" th:href="@{/challenges/2/charts}">Charts</a>
 
-                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/2/charts'}" th:href="@{/challenges/1}">Dash Board</a>
-                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/2/charts'}" th:href="@{/challenges/1/leader-board}">Leader Board</a>
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/2/charts'}" th:href="@{/challenges/2}">Dash Board</a>
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/2/charts'}" th:href="@{/challenges/2/leader-board}">Leader Board</a>
 
-                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/3/charts (id=${challenge.id})'}" th:href="@{/challenges/1/leader-board}">Leader Board</a>
-                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/3'}" th:href="@{/challenges/1/charts}">Charts</a>
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/3'}" th:href="@{/challenges/3/leader-board}">Leader Board</a>
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/3'}" th:href="@{/challenges/3/charts}">Charts</a>
 
-                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/3/leader-board'}" th:href="@{/challenges/1}">Dash Board</a>
-                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/3/leader-board'}" th:href="@{/challenges/1/charts}">Charts</a>
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/3/leader-board'}" th:href="@{/challenges/3}">Dash Board</a>
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/3/leader-board'}" th:href="@{/challenges/3/charts}">Charts</a>
 
-                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/3/charts'}" th:href="@{/challenges/1}">Dash Board</a>
-                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/3/charts'}" th:href="@{/challenges/1/leader-board}">Leader Board</a>
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/3/charts'}" th:href="@{/challenges/3}">Dash Board</a>
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges/3/charts'}" th:href="@{/challenges/3/leader-board}">Leader Board</a>
             </div>
         </div>
     </nav>

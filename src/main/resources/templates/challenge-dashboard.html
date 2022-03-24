@@ -28,14 +28,14 @@
             <thead class="table-dark">
 
             <tr>
-                <td>Challenger</td> <td>Current Week</td> <td>Set PR</td><td>Daily PR</td><td>Weekly PR</td><td>Cumulative</td><td>Status</td>
+                <td>Challenger</td> <td>Current Week</td> <td>Set PR</td><td>Daily PR</td><td>Weekly PR</td><td>Cumulative</td>
             </tr>
             </thead>
             <tbody>
             <tr th:each="stat : ${stats}">
                 <td th:text="${stat.user.name}" /><td th:text="${stat.current_week}" />
                 <td th:text="${stat.set_pr}" /> <td th:text="${stat.daily_pr}"/><td th:text="${stat.weekly_pr}"/>
-                <td th:text="${stat.cumalitive}" /> <td th:text="${stat.status}"/>
+                <td th:text="${stat.cumalitive}" />
             </tr>
             </tbody>
         </table>
