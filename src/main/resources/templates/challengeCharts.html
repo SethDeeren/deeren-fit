@@ -12,9 +12,16 @@
 <div th:replace="components/navbar :: navbar"></div>
 <div class="container mt-5">
     <!--    <h4 align="center">Cumulative By User</h4>-->
+    <div style="width: 550px; height: 150px; margin: 0 auto">
+        <h3 th:text="${challenge.title}"></h3>
+        <p th:text="${challenge.motto}"></p>
+        <a th:href="@{/challenges/{id}/my_trackers (id=${challenge.id})}">Add your daily trackers</a>
+    </div>
 
     <div id="groupCumulativeOverTime"
-         style="width: 550px; height: 400px; margin: 0 auto"></div>
+         style="width: 550px; height: 400px; margin: 0 auto">
+
+    </div>
     <div id="userCumulative"
          style="width: 550px; height: 400px; margin: 0 auto"></div>
     <div id="setPrs"
@@ -23,7 +30,7 @@
          class="mt-10" style="width: 550px; height: 400px; margin: 0 auto"></div>
     <div id="weeklyPrs"
          class="mt-10" style="width: 550px; height: 400px; margin: 0 auto"></div>
-    <a th:href="@{/challenges/{id} (id=${challengeId})}">Back to Dashboard</a>
+<!--    <a th:href="@{/challenges/{id} (id=${challenge.id})}">Back to Dashboard</a>-->
 </div>
 <script
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

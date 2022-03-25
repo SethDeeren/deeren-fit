@@ -188,21 +188,22 @@ public class UserStatsService {
 
         for (UserStats userStats : userStatsList) {
             String status = userStats.getStatus();
+            userStats.setPoints(userStats.getCumalitive());
             if (userStats.getCumalitive() >= highestCumulative) {
                 status = status.equals("") ? "Highest Cumulative" : status + ", Highest Cumulative";
-                userStats.setPoints(userStats.getPoints() + 5);
+                userStats.setPoints(userStats.getPoints() + 25);
             }
             if (userStats.getSet_pr() >= highestSetPR) {
-                status = status.equals("") ? "Highest Set PR" : status + ", Highest Set PR";
-                userStats.setPoints(userStats.getPoints() + 2);
+                status = status.equals("") ? "Highest Set PR" : status + ", Set PR";
+                userStats.setPoints(userStats.getPoints() + 10);
             }
             if (userStats.getDaily_pr() >= highestDailyPR) {
-                status = status.equals("") ? "Highest Daily PR" : status + ", Highest Daily PR";
-                userStats.setPoints(userStats.getPoints() + 2);
+                status = status.equals("") ? "Highest Daily PR" : status + ", Daily PR";
+                userStats.setPoints(userStats.getPoints() + 15);
             }
             if(userStats.getWeekly_pr() >= highestWeeklyPR) {
-                status = status.equals("") ? "Highest Weekly PR" : status + ", Highest Weekly PR";
-                userStats.setPoints(userStats.getPoints() + 2);
+                status = status.equals("") ? "Highest Weekly PR" : status + " and Weekly PR";
+                userStats.setPoints(userStats.getPoints() + 20);
             }
             userStats.setStatus(status);
 

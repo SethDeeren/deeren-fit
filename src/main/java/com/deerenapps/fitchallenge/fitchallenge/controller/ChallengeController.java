@@ -77,7 +77,6 @@ public class ChallengeController {
     @GetMapping("/challenges/{challengeId}/charts")
     public String getChallengeCharts(Model model, @PathVariable long challengeId){
 
-        // Getting Maps should be in ChallengeService class
 
         // more complex query needed special method possibly change ddl in future
         Map<String, Integer> teamAccumulationOverTimeMap = challengeService.getGroupAccumulationOverTime(challengeId);
@@ -90,7 +89,7 @@ public class ChallengeController {
 
 
         // dashboard link
-        model.addAttribute("challengeId", challengeId);
+        model.addAttribute("challenge", challengeService.getChallengeById(challengeId));
 
         // for group accumulation over time chart
         model.addAttribute("groupAccumulationOverTimeKeySet", teamAccumulationOverTimeMap.keySet());

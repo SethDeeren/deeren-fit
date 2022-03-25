@@ -77,8 +77,7 @@ public class DailyTrackerService {
 
     /*
      *   Adds daily tracker to user, updates their stats
-     *   currently each user only has one stats record
-     *   will need to update method if in future there is more TODO
+     *
      */
     public DailyTracker addDailyTracker(DailyTrackerRequest dailyTrackerRequest){
 

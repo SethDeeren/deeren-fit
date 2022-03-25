@@ -33,6 +33,11 @@
 <!--                <input type="text" th:field="*{startDate}" pattern="\d{1,2}/\d{1,2}/\d{4}" class="datepicker" name="date" required/>-->
                 <input id="date"  th:field="*{startDate}" class="form-control" type="date"  pattern="\d{4}-\d{1,2}-\d{1,2}" placeholder="yyyy-mm-dd" required/>
             </div>
+            <div class="form-group">
+                <label for="endDate">Select End Date</label>
+                <!--                <input type="text" th:field="*{startDate}" pattern="\d{1,2}/\d{1,2}/\d{4}" class="datepicker" name="date" required/>-->
+                <input id="endDate"  th:field="*{endDate}" class="form-control" type="date"  pattern="\d{4}-\d{1,2}-\d{1,2}" placeholder="yyyy-mm-dd" required/>
+            </div>
             <button type="submit" class="btn btn-dark">Let's do this</button>
         </div>
     </form>
