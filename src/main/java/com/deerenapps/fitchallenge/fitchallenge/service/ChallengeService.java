@@ -86,7 +86,7 @@ public class ChallengeService {
             LocalDate date = ((Date) dayAndSum[0]).toLocalDate();
             String day = date.getMonth() + " " + date.getDayOfMonth();
 
-            if(i == 0 || i % theModulator == 0 || i == numOfChallengeDays - 1){
+            if(i == 0 || theModulator == 0 || i % theModulator == 0 || i == numOfChallengeDays - 1){
                 resultMap.put(day, sum);
             }
 
