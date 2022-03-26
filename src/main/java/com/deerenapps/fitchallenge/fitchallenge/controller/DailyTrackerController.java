@@ -3,6 +3,7 @@ package com.deerenapps.fitchallenge.fitchallenge.controller;
 import com.deerenapps.fitchallenge.fitchallenge.entities.DailyTracker;
 import com.deerenapps.fitchallenge.fitchallenge.repos.DailyTrackerRepository;
 import com.deerenapps.fitchallenge.fitchallenge.repos.UserRepository;
+import com.deerenapps.fitchallenge.fitchallenge.service.ChallengeService;
 import com.deerenapps.fitchallenge.fitchallenge.service.DailyTrackerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,12 +25,16 @@ public class DailyTrackerController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ChallengeService challengeService;
+
     @GetMapping("/challenges/{id}/my_trackers")
     public String getMyDailyTrackers(Model theModel,
                                      @PathVariable("id") long challengeId){
         // add to the spring model, "stats" is what is referenced in the template
         theModel.addAttribute("stats", dailyTrackerService.getMyDailyTrackers(challengeId));
         theModel.addAttribute("challengeId",challengeId);
+        theModel.addAttribute("challenge", challengeService.getChallengeById(challengeId));
         return "stat-editor";
     }
 
