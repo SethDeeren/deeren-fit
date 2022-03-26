@@ -1,0 +1,26 @@
+<div th:fragment="main-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{/challenges}">Deeren Fit</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" th:href="@{/challenges}">Home <span class="sr-only">(current)</span></a>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-link" th:if="${#httpServletRequest.requestURI == '/challenges'}" th:href="@{/challenges/create-form}">Create Challenge</a>
+            </div>
+            <div  sec:authorize="isAuthenticated()" class="navbar-nav">
+                <a class="nav-link" th:href="@{/users/edit-form}">Edit Profile</a>
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </div>
+            <div  sec:authorize="isAnonymous()" class="navbar-nav">
+
+                <a class="nav-link" th:href="@{/users/register-form}">Sign Up</a>
+                <a class="nav-link" th:href="@{/login}">Login</a>
+            </div>
+
+        </div>
+    </nav>
+</div>
